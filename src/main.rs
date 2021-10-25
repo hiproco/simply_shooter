@@ -15,6 +15,7 @@ use bevy::{
 use bevy_asset_ron::RonAssetPlugin;
 use serde::Deserialize;
 use simply_shooter::{player::{*, player_control::*}, enemy::{*, enemey::*}};
+use heron::{PhysicsPlugin, ext::AppBuilderExt};
 
 //Just make a simple side scroll shooter
 struct Damage(i32);
@@ -26,6 +27,7 @@ struct Projectile(f32);
 fn main() {
     App::build()
         .add_plugins(DefaultPlugins)
+        .add_plugin(PhysicsPlugin::default())
         .add_startup_system(spawn_camera.system())
         //.add_plugin(RonAssetPlugin::<Projectile>::new(&["proj.ron"]))
         //.add_startup_system(startup.system())
