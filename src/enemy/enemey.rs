@@ -15,18 +15,20 @@ pub fn spawn_enemy(
         sprite_bundle: SpriteBundle,
         enemy: Enemy,
     }
-    command.spawn_batch(std::iter::from_fn(move || {
-        c += 1.0;
-        Some(EnemyBundle {
-            sprite_bundle: SpriteBundle {
-                material : material.clone(),
-                transform: Transform::from_translation(Vec3::new(c, 0.0, 0.0)),
-                ..Default::default()
-            },
-            enemy: Enemy
-        }
-        )
-    }).take(5));
+    command.spawn_batch(
+        std::iter::from_fn(move || {
+            c += 16.0;
+            Some(EnemyBundle {
+                sprite_bundle: SpriteBundle {
+                    material: material.clone(),
+                    transform: Transform::from_translation(Vec3::new(c, 0.0, 0.0)),
+                    ..Default::default()
+                },
+                enemy: Enemy,
+            })
+        })
+        .take(5),
+    );
     // command
     //     .spawn()
     //     .insert_bundle(SpriteBundle {
