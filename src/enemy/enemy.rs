@@ -1,5 +1,6 @@
 use super::Enemy;
 use bevy::prelude::*;
+use heron::{prelude::*, rapier_plugin::nalgebra};
 
 pub fn spawn_enemy(
     mut command: Commands,
@@ -14,6 +15,8 @@ pub fn spawn_enemy(
         #[bundle]
         sprite_bundle: SpriteBundle,
         enemy: Enemy,
+        collider: RigidBody,
+        shape: CollisionShape,
     }
     command.spawn_batch(
         std::iter::from_fn(move || {
@@ -25,10 +28,13 @@ pub fn spawn_enemy(
                     ..Default::default()
                 },
                 enemy: Enemy,
+                collider: RigidBody::Sensor,
+                shape: CollisionShape::Cuboid { half_extends: Vec3::new(8.0, 8.0, 0.0), border_radius: None },
             })
         })
         .take(5),
     );
+    
     // command
     //     .spawn()
     //     .insert_bundle(SpriteBundle {

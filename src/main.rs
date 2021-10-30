@@ -14,8 +14,8 @@ use bevy::{
 };
 use bevy_asset_ron::RonAssetPlugin;
 use serde::Deserialize;
-use simply_shooter::{player::{*, player_control::*}, enemy::{*, enemey::*}};
-use heron::{PhysicsPlugin, ext::AppBuilderExt};
+use simply_shooter::{player::{*, player_control::*}, enemy::{*, enemy::*}};
+use heron::{PhysicsPlugin, rapier_plugin::RapierPlugin};
 
 //Just make a simple side scroll shooter
 struct Damage(i32);
@@ -29,20 +29,21 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugin(PhysicsPlugin::default())
         .add_startup_system(spawn_camera.system())
-        //.add_plugin(RonAssetPlugin::<Projectile>::new(&["proj.ron"]))
-        //.add_startup_system(startup.system())
+        .add_plugin(RonAssetPlugin::<Projectile>::new(&["proj.ron"]))
+        .add_startup_system(startup.system())
         .add_startup_system(spawn_enemy.system())
-        // .add_system_set(
-        //     SystemSet::new()
-        //         .with_run_criteria(pressing_fire.system())
-        //         .with_system(spawnbullet::<PlayerShip>.system())
-        //         .with_system(spawnbullet::<SideArm>.system()),
-        // )
-        // .add_system(projectile.system())
-        // .add_system(timer.system())
-        // .add_system(player_movement.system())
-        // .add_system(bullet_life.system())
-        // .add_system(mouse_control.system())
+        .add_system(shoot.system())
+        .add_system_set(
+            SystemSet::new()
+                .with_run_criteria(pressing_fire.system())
+                .with_system(spawnbullet::<PlayerShip>.system())
+                .with_system(spawnbullet::<SideArm>.system()),
+        )
+        .add_system(projectile.system())
+        .add_system(timer.system())
+        .add_system(player_movement.system())
+        .add_system(bullet_life.system())
+        .add_system(mouse_control.system())
         .run();
 }
 
@@ -127,5 +128,3 @@ fn startup(
             spawn_sidearm(side_handle, -translation);
         });
 }
-
-

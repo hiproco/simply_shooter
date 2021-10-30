@@ -1,4 +1,5 @@
-use bevy::{ecs::schedule::ShouldRun, math::{Vec3Swizzles, Vec4Swizzles}, prelude::*, render::camera::Camera};
+use bevy::{ecs::{entity::Entities, schedule::ShouldRun}, math::{Vec3Swizzles, Vec4Swizzles}, prelude::*, render::camera::Camera};
+use heron::rapier_plugin::PhysicsWorld;
 
 use super::PlayerShip;
 
@@ -47,5 +48,13 @@ pub fn mouse_control(
         let mut player = query.q1_mut().single_mut().expect("single player");
         player.rotation =
             Quat::from_rotation_z(Vec2::Y.angle_between(pos_wld.xy() - player.translation.xy()));
+    }
+}
+
+pub fn shoot(p_world: PhysicsWorld, query: Query<(&Transform,&Sprite), With<PlayerShip>>) {
+    let (p,s) = query.single().expect("single player");
+    if let Some(c) = p_world.ray_cast(p.translation + p.local_y() * (s.size.y / 2.0), p.local_y() * 10.0, false) {
+        dbg!(c);
+        
     }
 }

@@ -1,3 +1,3 @@
-pub mod enemey;
+pub mod enemy;
 
 pub struct Enemy;
