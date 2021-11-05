@@ -1,0 +1,7 @@
+enemy
+    hp
+    attack?
+    sprite
+    hitbox (collisoin shape)
+
+player

@@ -2,6 +2,15 @@ use super::Enemy;
 use bevy::prelude::*;
 use heron::{prelude::*, rapier_plugin::nalgebra};
 
+#[derive(Bundle)]
+struct EnemyBundle {
+    #[bundle]
+    sprite_bundle: SpriteBundle,
+    enemy: Enemy,
+    collider: RigidBody,
+    shape: CollisionShape,
+}
+
 pub fn spawn_enemy(
     mut command: Commands,
     asset_server: Res<AssetServer>,
@@ -10,17 +19,9 @@ pub fn spawn_enemy(
     let mut c = 0.0;
     let material = materials.add(asset_server.load("enemy.png").into());
     asset_server.watch_for_changes().unwrap();
-    #[derive(Bundle)]
-    struct EnemyBundle {
-        #[bundle]
-        sprite_bundle: SpriteBundle,
-        enemy: Enemy,
-        collider: RigidBody,
-        shape: CollisionShape,
-    }
     command.spawn_batch(
         std::iter::from_fn(move || {
-            c += 16.0;
+            c += 32.0;
             Some(EnemyBundle {
                 sprite_bundle: SpriteBundle {
                     material: material.clone(),

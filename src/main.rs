@@ -14,8 +14,8 @@ use bevy::{
 };
 use bevy_asset_ron::RonAssetPlugin;
 use serde::Deserialize;
-use simply_shooter::{player::{*, player_control::*}, enemy::{*, enemy::*}};
-use heron::{PhysicsPlugin, rapier_plugin::RapierPlugin};
+use simply_shooter::{Weapon, enemy::{*, enemy::*}, player::{*, player_control::*}};
+use heron::{CollisionShape, PhysicsPlugin, RigidBody, rapier_plugin::RapierPlugin};
 
 //Just make a simple side scroll shooter
 struct Damage(i32);
@@ -44,6 +44,7 @@ fn main() {
         .add_system(player_movement.system())
         .add_system(bullet_life.system())
         .add_system(mouse_control.system())
+        .add_system(Weapon::hit.system())
         .run();
 }
 
@@ -79,11 +80,15 @@ fn spawnbullet<Launcher: component::Component>(
                     transform: Transform::from_matrix(trans.compute_matrix()),
                     ..Default::default()
                 })
-                .insert_bundle((proj_handle.clone(), Timer::from_seconds(5.0, false)));
+                .insert_bundle((proj_handle.clone(), Timer::from_seconds(5.0, false)))
+                .insert(RigidBody::KinematicPositionBased)
+                .insert(CollisionShape::Capsule {half_segment:0.5, radius: 1.0})
+                .insert(Projectile);
             timer.reset();
         });
     }
 }
+
 
 fn projectile(
     mut bullet: Query<(&mut Transform, &Handle<Projectile>)>,
