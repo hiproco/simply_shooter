@@ -1,5 +1,7 @@
 use bevy::{ecs::schedule::ShouldRun, math::{Vec3Swizzles, Vec4Swizzles}, prelude::*, render::camera::Camera};
 
+use crate::velocity::Velocity;
+
 use super::PlayerShip;
 
 pub fn pressing_fire(input: Res<Input<MouseButton>>) -> ShouldRun {
@@ -10,10 +12,10 @@ pub fn pressing_fire(input: Res<Input<MouseButton>>) -> ShouldRun {
 }
 
 pub fn player_movement(
-    mut player: Query<(&mut Transform), With<PlayerShip>>,
+    mut player: Query<(&mut Velocity), With<PlayerShip>>,
     input: Res<Input<KeyCode>>,
 ) {
-    let (mut trans) = player.single_mut().expect("single player!");
+    let (mut velocity) = player.single_mut().expect("single player!");
     let axis = |pos_keys: &[KeyCode], neg_keys: &[KeyCode]| {
         let natural_axis = |keys: &[KeyCode]| -> f32 {
             keys.into_iter()
@@ -23,7 +25,7 @@ pub fn player_movement(
         };
         natural_axis(pos_keys) - natural_axis(neg_keys)
     };
-    trans.translation += Vec3::new(
+    velocity.0 += Vec3::new(
         axis(&[KeyCode::D, KeyCode::Right], &[KeyCode::A, KeyCode::Left]),
         axis(&[KeyCode::W, KeyCode::Up], &[KeyCode::S, KeyCode::Down]),
         0.0,
