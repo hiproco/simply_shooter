@@ -15,7 +15,7 @@ use bevy_asset_ron::RonAssetPlugin;
 use serde::Deserialize;
 use simply_shooter::{
     enemy::{ *},
-    player::{player_control::*, *},
+    player::{*},
     projectile::Projectile,
     projectile::*,
     velocity::{velocity_system, Velocity},
@@ -42,6 +42,7 @@ fn main() {
         .add_system(bullet_life.system())
         .add_system(mouse_control.system())
         .add_system(velocity_system.system())
+        .add_system(animate_wing.system())
         .run();
 }
 

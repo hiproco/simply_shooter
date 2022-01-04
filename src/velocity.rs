@@ -3,7 +3,12 @@ use bevy::{math::Vec3, prelude::{Query, With, Transform}};
 use crate::player::PlayerShip;
 
 
+
 pub struct Velocity(pub Vec3);
+
+impl Velocity {
+    pub const MAX: f32 = 10.0;
+}
 
 pub fn velocity_system(mut query:Query<(&mut Velocity, &mut Transform), With<PlayerShip>>) {
     let (mut velocity, mut transform) = query.single_mut().expect("only single player");
