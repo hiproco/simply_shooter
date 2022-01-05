@@ -9,7 +9,7 @@ use bevy::{
     math::{Vec3Swizzles, Vec4Swizzles},
     prelude::*,
     reflect::TypeUuid,
-    render::camera::Camera,
+    render::camera::{Camera, ScalingMode, OrthographicProjection},
 };
 use bevy_asset_ron::RonAssetPlugin;
 use serde::Deserialize;
@@ -53,7 +53,9 @@ fn timer(mut timers: Query<(&mut Timer)>, time: Res<Time>) {
 }
 
 fn spawn_camera(mut command: Commands) {
-    command.spawn_bundle(OrthographicCameraBundle::new_2d());
+    let mut cam = OrthographicCameraBundle::new_2d();
+    cam.orthographic_projection.scale = 1.0;
+    command.spawn_bundle(cam);
 }
 
 fn startup(
@@ -80,9 +82,22 @@ fn startup(
                 })
                 .insert_bundle((SideArm, Timer::from_seconds(1.0, false)));
             };
-            let side_handle = asset_server.load("side_cannon.png");
+            let side_handle = asset_server.load("shootingcraft/gunmodule.png");
             let translation = Vec3::X.mul(15.0);
             spawn_sidearm(side_handle.clone(), translation);
             spawn_sidearm(side_handle, -translation);
+            let mut spawn_wing = |wing_handle: Handle<Texture>, translation:Vec3| {
+                c.spawn_bundle(SpriteBundle {
+                    material: materials.add(wing_handle.into()),
+                    transform: Transform::from_translation(translation),
+                    ..Default::default()
+                })
+                .insert(Wing);
+            };
+            
+            let left_wing = asset_server.load("shootingcraft/left_wing.png");
+            let right_wing = asset_server.load("shootingcraft/right_wing.png");
+            spawn_wing(left_wing,-Vec3::X * 15.0);
+            spawn_wing(right_wing,Vec3::X * 15.0);
         });
 }

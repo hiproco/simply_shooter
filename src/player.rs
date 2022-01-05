@@ -9,6 +9,7 @@ pub struct PlayerShip;
 #[derive(Debug, Clone, Copy)]
 pub struct SideArm;
 
+pub struct Wing;
 
 pub fn pressing_fire(input: Res<Input<MouseButton>>) -> ShouldRun {
     input
@@ -63,9 +64,16 @@ pub fn animate_wing(mut query: QuerySet<(Query<&mut Transform,With<SideArm>>, Qu
     let normilzed_length = pv.0.length() / Velocity::MAX;
     let forward = pt.local_y().dot(pv.0).is_sign_positive();
     for mut wing in query.q0_mut().iter_mut() {
-        let rotate = match (wing.translation.x.is_sign_positive(), forward) {
+        let right = wing.translation.x.is_sign_positive();
+        let rotate = match (right, forward) {
             (true, true) | (false, false) => normilzed_length,
             (false, true) | (true, false) => -normilzed_length,
+        };
+        let translation = (wing.local_x() * 15.0 + wing.local_y() * normilzed_length).clamp_length_max(15.0);
+        wing.translation = if right {
+            translation
+        } else {
+            -translation
         };
         wing.rotation = Quat::from_rotation_z(rotate / 2.0);
     }
