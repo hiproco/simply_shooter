@@ -10,6 +10,7 @@ pub struct Projectile(f32);
 struct Damage(i32);
 
 
+
 pub fn bullet_life(bullet: Query<(Entity, &Timer), With<Handle<Projectile>>>, mut command: Commands) {
     bullet.for_each_mut(|(e, t)| {
         if t.finished() {
