@@ -11,6 +11,9 @@ pub struct SideArm;
 
 pub struct Wing;
 
+
+pub struct MissileModule;
+
 pub fn pressing_fire(input: Res<Input<MouseButton>>) -> ShouldRun {
     input
         .pressed(MouseButton::Left)
@@ -59,17 +62,19 @@ pub fn mouse_control(
     }
 }
 
-pub fn animate_wing(mut query: QuerySet<(Query<&mut Transform,With<SideArm>>, Query<(&Velocity, &Transform),With<PlayerShip>>)>) {
+pub fn animate_wing(mut query: QuerySet<(Query<&mut Transform,With<Wing>>, Query<(&Velocity, &Transform),With<PlayerShip>>)>) {
     let (pv,pt) = query.q1().single().expect("single player!");
-    let normilzed_length = pv.0.length() / Velocity::MAX;
+    let unnormilized_length = pv.0.length();
+    let normilized_length = unnormilized_length / Velocity::MAX;
     let forward = pt.local_y().dot(pv.0).is_sign_positive();
     for mut wing in query.q0_mut().iter_mut() {
         let right = wing.translation.x.is_sign_positive();
         let rotate = match (right, forward) {
-            (true, true) | (false, false) => normilzed_length,
-            (false, true) | (true, false) => -normilzed_length,
+            (true, true) | (false, false) => -normilized_length,
+            (false, true) | (true, false) => normilized_length,
         };
-        let translation = (wing.local_x() * 15.0 + wing.local_y() * normilzed_length).clamp_length_max(15.0);
+        let length = wing.translation.length();
+        let translation = (wing.local_x() * length + wing.local_y() * unnormilized_length).clamp_length_max(length);
         wing.translation = if right {
             translation
         } else {

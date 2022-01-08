@@ -1,4 +1,4 @@
-use std::ops::Mul;
+use std::ops::{Add, Mul};
 
 use bevy::{
     ecs::{
@@ -9,13 +9,13 @@ use bevy::{
     math::{Vec3Swizzles, Vec4Swizzles},
     prelude::*,
     reflect::TypeUuid,
-    render::camera::{Camera, ScalingMode, OrthographicProjection},
+    render::camera::{Camera, OrthographicProjection, ScalingMode},
 };
 use bevy_asset_ron::RonAssetPlugin;
 use serde::Deserialize;
 use simply_shooter::{
-    enemy::{ *},
-    player::{*},
+    enemy::*,
+    player::*,
     projectile::Projectile,
     projectile::*,
     velocity::{velocity_system, Velocity},
@@ -33,7 +33,7 @@ fn main() {
         .add_system_set(
             SystemSet::new()
                 .with_run_criteria(pressing_fire.system())
-                .with_system(spawnbullet::<PlayerShip>.system())
+                .with_system(spawnbullet::<MissileModule>.system())
                 .with_system(spawnbullet::<SideArm>.system()),
         )
         .add_system(projectile.system())
@@ -53,9 +53,7 @@ fn timer(mut timers: Query<(&mut Timer)>, time: Res<Time>) {
 }
 
 fn spawn_camera(mut command: Commands) {
-    let mut cam = OrthographicCameraBundle::new_2d();
-    cam.orthographic_projection.scale = 1.0;
-    command.spawn_bundle(cam);
+    command.spawn_bundle(OrthographicCameraBundle::new_2d());
 }
 
 fn startup(
@@ -63,7 +61,7 @@ fn startup(
     asset_server: Res<AssetServer>,
     mut materials: ResMut<Assets<ColorMaterial>>,
 ) {
-    let texture_handle = asset_server.load("icon.png");
+    let texture_handle = asset_server.load("shootingcraft/cockpit.png");
     asset_server.watch_for_changes().unwrap();
     command
         .spawn_bundle(SpriteBundle {
@@ -71,33 +69,49 @@ fn startup(
             transform: Transform::from_rotation(Quat::from_rotation_z(-1.57)),
             ..Default::default()
         })
-        .insert_bundle((Timer::from_seconds(0.2, false), PlayerShip))
+        .insert(PlayerShip)
         .insert(Velocity(Vec3::ZERO))
         .with_children(|c| {
+            let from_translation = |translation| Transform::from_translation(translation);
             let mut spawn_sidearm = |side_handle: Handle<Texture>, translation: Vec3| {
                 c.spawn_bundle(SpriteBundle {
                     material: materials.add(side_handle.into()),
-                    transform: Transform::from_translation(translation),
+                    transform: from_translation(translation),
                     ..Default::default()
                 })
                 .insert_bundle((SideArm, Timer::from_seconds(1.0, false)));
             };
             let side_handle = asset_server.load("shootingcraft/gunmodule.png");
-            let translation = Vec3::X.mul(15.0);
-            spawn_sidearm(side_handle.clone(), translation);
-            spawn_sidearm(side_handle, -translation);
-            let mut spawn_wing = |wing_handle: Handle<Texture>, translation:Vec3| {
+            let translation = Vec3::new(10.0, 42.0, 0.0);
+            spawn_sidearm(side_handle.clone(), (translation - Vec3::X * 20.0).clamp_length_max(450.0));
+            spawn_sidearm(side_handle.clone(), translation.clamp_length_max(450.0));
+            spawn_sidearm(side_handle.clone(), (translation - Vec3::X * 30.0).clamp_length_max(450.0));
+            spawn_sidearm(side_handle, (translation + Vec3::X * 10.0).clamp_length_max(450.0));
+            let mut spawn_wing = |wing_handle: Handle<Texture>, translation: Vec3| {
                 c.spawn_bundle(SpriteBundle {
                     material: materials.add(wing_handle.into()),
-                    transform: Transform::from_translation(translation),
+                    transform: from_translation(translation),
                     ..Default::default()
                 })
                 .insert(Wing);
             };
-            
+
             let left_wing = asset_server.load("shootingcraft/left_wing.png");
             let right_wing = asset_server.load("shootingcraft/right_wing.png");
-            spawn_wing(left_wing,-Vec3::X * 15.0);
-            spawn_wing(right_wing,Vec3::X * 15.0);
+            let offset = Vec3::X * 1000.0;
+            spawn_wing(left_wing, -offset);
+            spawn_wing(right_wing, offset);
+            c.spawn_bundle(SpriteBundle {
+                material: materials
+                    .add(asset_server.load("shootingcraft/missilemodule.png").into()),
+                transform: from_translation(Vec3::Y * 450.0),
+                ..Default::default()
+            })
+            .insert_bundle((MissileModule, Timer::from_seconds(0.2, false)));
+            c.spawn_bundle(SpriteBundle {
+                material: materials.add(asset_server.load("shootingcraft/halothingy.png").into()),
+                transform: Transform::from_translation(Vec3::ZERO),
+                ..Default::default()
+            });
         });
 }

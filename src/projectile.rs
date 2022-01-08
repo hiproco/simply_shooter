@@ -29,11 +29,12 @@ pub fn spawnbullet<Launcher: component::Component>(
     let proj_handle: Handle<Projectile> = asset_server.load("bullet.proj.ron");
 
     for (mut timer, trans) in player.iter_mut() {
+        let (_,rotation,translation) = trans.compute_matrix().to_scale_rotation_translation();
         timer.finished().then(|| {
             command
                 .spawn_bundle(SpriteBundle {
                     material: materials.add(texture_handle.clone().into()),
-                    transform: Transform::from_matrix(trans.compute_matrix()),
+                    transform: Transform::from_matrix(Mat4::from_rotation_translation(rotation, translation)),
                     ..Default::default()
                 })
                 .insert_bundle((proj_handle.clone(), Timer::from_seconds(5.0, false)));
