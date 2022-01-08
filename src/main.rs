@@ -98,13 +98,13 @@ fn startup(
 
             let left_wing = asset_server.load("shootingcraft/left_wing.png");
             let right_wing = asset_server.load("shootingcraft/right_wing.png");
-            let offset = Vec3::X * 1000.0;
+            let offset = Vec3::X * 100.0;
             spawn_wing(left_wing, -offset);
             spawn_wing(right_wing, offset);
             c.spawn_bundle(SpriteBundle {
                 material: materials
                     .add(asset_server.load("shootingcraft/missilemodule.png").into()),
-                transform: from_translation(Vec3::Y * 450.0),
+                transform: from_translation(Vec3::Y * 45.0),
                 ..Default::default()
             })
             .insert_bundle((MissileModule, Timer::from_seconds(0.2, false)));
