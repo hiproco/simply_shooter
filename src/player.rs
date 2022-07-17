@@ -1,17 +1,23 @@
-use bevy::{ecs::schedule::ShouldRun, math::{Vec3Swizzles, Vec4Swizzles}, prelude::*, render::camera::Camera};
+use bevy::{
+    ecs::schedule::ShouldRun,
+    math::{Vec3Swizzles, Vec4Swizzles},
+    prelude::*,
+    render::camera::Camera,
+};
 
 use crate::velocity::Velocity;
 
-#[derive(Debug, Clone, Copy)]
+
+#[derive(Debug, Clone, Copy, Component)]
 pub struct PlayerShip;
 
-
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Component)]
 pub struct SideArm;
 
+#[derive(Component)]
 pub struct Wing;
 
-
+#[derive(Component)]
 pub struct MissileModule;
 
 pub fn pressing_fire(input: Res<Input<MouseButton>>) -> ShouldRun {
@@ -22,10 +28,10 @@ pub fn pressing_fire(input: Res<Input<MouseButton>>) -> ShouldRun {
 }
 
 pub fn player_movement(
-    mut player: Query<(&mut Velocity), With<PlayerShip>>,
+    mut player: Query<&mut Velocity, With<PlayerShip>>,
     input: Res<Input<KeyCode>>,
 ) {
-    let mut velocity = player.single_mut().expect("single player!");
+    let mut velocity = player.single_mut();
     let axis = |pos_keys: &[KeyCode], neg_keys: &[KeyCode]| {
         let natural_axis = |keys: &[KeyCode]| -> f32 {
             keys.into_iter()
@@ -35,18 +41,19 @@ pub fn player_movement(
         };
         natural_axis(pos_keys) - natural_axis(neg_keys)
     };
-    velocity.0 = (velocity.0 + Vec3::new(
-        axis(&[KeyCode::D, KeyCode::Right], &[KeyCode::A, KeyCode::Left]),
-        axis(&[KeyCode::W, KeyCode::Up], &[KeyCode::S, KeyCode::Down]),
-        0.0,
-    )).clamp_length_max(Velocity::MAX);
+    velocity.0 = (velocity.0
+        + Vec3::new(
+            axis(&[KeyCode::D, KeyCode::Right], &[KeyCode::A, KeyCode::Left]),
+            axis(&[KeyCode::W, KeyCode::Up], &[KeyCode::S, KeyCode::Down]),
+            0.0,
+        ))
+    .clamp_length_max(Velocity::MAX);
 }
-
 
 pub fn mouse_control(
     mut query: QuerySet<(
-        Query<&Transform, With<Camera>>,
-        Query<&mut Transform, With<PlayerShip>>,
+        QueryState<&Transform, With<Camera>>,
+        QueryState<&mut Transform, With<PlayerShip>>,
     )>,
     wnd: Res<Windows>,
 ) {
@@ -54,33 +61,34 @@ pub fn mouse_control(
     if let Some(c) = pwnd.cursor_position() {
         let size = Vec2::new(pwnd.width(), pwnd.height());
         let p = c - size / 2.0;
-        let mc = query.q0().single().unwrap();
+        let mc = query.q0().single();
         let pos_wld = mc.compute_matrix() * p.extend(0.0).extend(1.0);
-        let mut player = query.q1_mut().single_mut().expect("single player");
-        player.rotation =
-            Quat::from_rotation_z(Vec2::Y.angle_between(pos_wld.xy() - player.translation.xy()));
+        let mut q1 = query.q1();
+        let mut player = q1.single_mut();
+        player.rotation = Quat::from_rotation_z(Vec2::Y.angle_between(pos_wld.xy() - player.translation.xy()));
     }
 }
 
-pub fn animate_wing(mut query: QuerySet<(Query<&mut Transform,With<Wing>>, Query<(&Velocity, &Transform),With<PlayerShip>>)>) {
-    let (pv,pt) = query.q1().single().expect("single player!");
+pub fn animate_wing(
+    mut query: QuerySet<(
+        QueryState<&mut Transform, With<Wing>>,
+        QueryState<(&Velocity, &Transform), With<PlayerShip>>,
+    )>,
+) {
+    let (pv, pt) = query.q1().single();
     let unnormilized_length = pv.0.length();
     let normilized_length = unnormilized_length / Velocity::MAX;
     let forward = pt.local_y().dot(pv.0).is_sign_positive();
-    for mut wing in query.q0_mut().iter_mut() {
+    for mut wing in query.q0().iter_mut() {
         let right = wing.translation.x.is_sign_positive();
         let rotate = match (right, forward) {
             (true, true) | (false, false) => -normilized_length,
             (false, true) | (true, false) => normilized_length,
         };
         let length = wing.translation.length();
-        let translation = (wing.local_x() * length + wing.local_y() * unnormilized_length).clamp_length_max(length);
-        wing.translation = if right {
-            translation
-        } else {
-            -translation
-        };
+        let translation = (wing.local_x() * length + wing.local_y() * unnormilized_length)
+            .clamp_length_max(length);
+        wing.translation = if right { translation } else { -translation };
         wing.rotation = Quat::from_rotation_z(rotate / 2.0);
     }
 }
-

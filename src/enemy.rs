@@ -1,16 +1,16 @@
 use bevy::prelude::*;
 
+#[derive(Component)]
 pub struct Enemy;
 
 pub fn spawn_enemy(
     mut commad: Commands,
     asset_server: Res<AssetServer>,
-    mut materials: ResMut<Assets<ColorMaterial>>,
 ) {
     commad
         .spawn()
         .insert_bundle(SpriteBundle {
-            material: materials.add(asset_server.load("enemy.png").into()),
+            texture: asset_server.load("enemy.png"),
             transform: Transform::from_translation(Vec3::new(10.0, 10.0, 0.0)),
             ..Default::default()
         })

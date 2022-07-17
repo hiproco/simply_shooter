@@ -1,22 +1,17 @@
-use std::ops::{Add, Mul};
+use std::io::Write;
 
 use bevy::{
-    ecs::{
-        schedule::ShouldRun,
-        system::{Command, EntityCommands},
-    },
-    input::mouse::MouseButtonInput,
-    math::{Vec3Swizzles, Vec4Swizzles},
+    ecs::system::EntityCommands,
+    math::vec2,
     prelude::*,
-    reflect::TypeUuid,
-    render::camera::{Camera, OrthographicProjection, ScalingMode},
+    reflect::TypeRegistry,
+    render::camera,
+    sprite::collide_aabb::{collide, Collision},
+    utils::HashMap,
 };
-use bevy_asset_ron::RonAssetPlugin;
-use serde::Deserialize;
 use simply_shooter::{
     enemy::*,
     player::*,
-    projectile::Projectile,
     projectile::*,
     velocity::{velocity_system, Velocity},
 };
@@ -24,94 +19,166 @@ use simply_shooter::{
 //Just make a simple side scroll shooter
 
 fn main() {
-    App::build()
+    App::new()
         .add_plugins(DefaultPlugins)
-        .add_startup_system(spawn_camera.system())
         .add_plugin(RonAssetPlugin::<Projectile>::new(&["proj.ron"]))
-        .add_startup_system(startup.system())
-        .add_startup_system(spawn_enemy.system())
+        .add_startup_system(spawn_camera)
+        .add_startup_system(startup)
+        .add_startup_system(spawn_enemy)
         .add_system_set(
             SystemSet::new()
-                .with_run_criteria(pressing_fire.system())
-                .with_system(spawnbullet::<MissileModule>.system())
-                .with_system(spawnbullet::<SideArm>.system()),
+                .with_run_criteria(pressing_fire)
+                .with_system(spawnbullet::<MissileModule>)
+                .with_system(spawnbullet::<SideArm>),
         )
-        .add_system(projectile.system())
-        .add_system(timer.system())
-        .add_system(player_movement.system())
-        .add_system(bullet_life.system())
-        .add_system(mouse_control.system())
-        .add_system(velocity_system.system())
-        .add_system(animate_wing.system())
+        .add_system(projectile)
+        .add_system(timer)
+        .add_system(player_movement)
+        .add_system(bullet_life)
+        .add_system(mouse_control)
+        .add_system(velocity_system)
+        .add_system(animate_wing)
+        .add_system(enemy_hit)
+        // .add_system(save_scene.exclusive_system())
+        // .add_system(load_scene.exclusive_system())
         .run();
 }
 
-fn timer(mut timers: Query<(&mut Timer)>, time: Res<Time>) {
+fn enemy_hit(
+    proj: Query<(Entity, &Transform), With<Handle<Projectile>>>,
+    enemy: Query<(Entity, &Transform), With<Enemy>>,
+    mut command: Commands,
+) {
+    for p in proj.iter() {
+        for e in enemy.iter() {
+            if let Some(_) = collide(
+                p.1.translation,
+                vec2(10.0, 10.0),
+                e.1.translation,
+                vec2(10.0, 10.0),
+            ) {
+                command.entity(p.0).despawn_recursive();
+                command.entity(e.0).despawn_recursive();
+            }
+        }
+    }
+}
+
+fn load_scene(mut scene_spawner: ResMut<SceneSpawner>, asset_server: Res<AssetServer>) {
+    scene_spawner.spawn(asset_server.load("scene/test.scn.ron"));
+    asset_server.watch_for_changes().unwrap();
+}
+
+fn save_scene(world: &mut World) {
+    let registry = world.get_resource::<TypeRegistry>().unwrap();
+    let scene = DynamicScene::from_world(world, registry);
+    let mut file = std::fs::File::create("assets/scene/test.scn.ron").unwrap();
+    file.write(scene.serialize_ron(registry).unwrap().as_bytes())
+        .unwrap();
+}
+
+fn timer(mut timers: Query<&mut Timer>, time: Res<Time>) {
     timers.iter_mut().for_each(|mut t| {
         t.tick(time.delta());
     });
 }
 
 fn spawn_camera(mut command: Commands) {
-    command.spawn_bundle(OrthographicCameraBundle::new_2d());
+    let mut camera_bundle = OrthographicCameraBundle::new_2d();
+    camera_bundle.orthographic_projection.scale *= 0.5;
+    command.spawn_bundle(camera_bundle);
 }
 
 fn startup(
     mut command: Commands,
     asset_server: Res<AssetServer>,
-    mut materials: ResMut<Assets<ColorMaterial>>,
+    _scence_spawner: Res<SceneSpawner>,
 ) {
     let texture_handle = asset_server.load("shootingcraft/cockpit.png");
     asset_server.watch_for_changes().unwrap();
+    // let children = command.spawn_batch(vec![
+    //     ()
+    // ]);
+    // command.spawn_scene(asset_server.load("scene/test.scn.ron"));
     command
         .spawn_bundle(SpriteBundle {
-            material: materials.add(texture_handle.into()),
+            texture: texture_handle,
             transform: Transform::from_rotation(Quat::from_rotation_z(-1.57)),
             ..Default::default()
         })
         .insert(PlayerShip)
         .insert(Velocity(Vec3::ZERO))
         .with_children(|c| {
-            let from_translation = |translation| Transform::from_translation(translation);
-            let mut spawn_sidearm = |side_handle: Handle<Texture>, translation: Vec3| {
-                c.spawn_bundle(SpriteBundle {
-                    material: materials.add(side_handle.into()),
-                    transform: from_translation(translation),
-                    ..Default::default()
+            // let shooting_craft = asset_server.load_folder("shootingcraft").unwrap();
+            #[derive(Bundle)]
+            struct BundleBundle<B1: Bundle, B2: Bundle> {
+                #[bundle]
+                b0: B1,
+                #[bundle]
+                b1: B2,
+            }
+            let mut textures = [
+                "shootingcraft/gunmodule.png",
+                "shootingcraft/left_wing.png",
+                "shootingcraft/right_wing.png",
+                "shootingcraft/missilemodule.png",
+                "shootingcraft/halothingy.png",
+            ]
+            .iter()
+            .map(|&path| asset_server.load(path));
+            // let side_handle = asset_server.load();
+            let translation = Vec3::new(0.0, 42.0, 0.0);
+            let side_handle = textures.next().unwrap();
+            (-2..3)
+                .map(|m| BundleBundle {
+                    b0: SpriteBundle {
+                        texture: side_handle.clone(),
+                        transform: Transform::from_translation(
+                            translation + Vec3::X * 10.0 * m as f32,
+                        ),
+                        sprite: Sprite {
+                            custom_size: Some(vec2(1f32, 4f32)),
+                            ..Default::default()
+                        },
+                        ..Default::default()
+                    },
+                    b1: (SideArm, Timer::from_seconds(1.0, false)),
                 })
-                .insert_bundle((SideArm, Timer::from_seconds(1.0, false)));
+                .for_each(|b| {
+                    c.spawn_bundle(b);
+                });
+            let mut spawn_wing = |texture: Handle<Image>, translation: Vec3| {
+                spawn_child(c, texture, translation, (Wing,));
             };
-            let side_handle = asset_server.load("shootingcraft/gunmodule.png");
-            let translation = Vec3::new(10.0, 42.0, 0.0);
-            spawn_sidearm(side_handle.clone(), (translation - Vec3::X * 20.0).clamp_length_max(450.0));
-            spawn_sidearm(side_handle.clone(), translation.clamp_length_max(450.0));
-            spawn_sidearm(side_handle.clone(), (translation - Vec3::X * 30.0).clamp_length_max(450.0));
-            spawn_sidearm(side_handle, (translation + Vec3::X * 10.0).clamp_length_max(450.0));
-            let mut spawn_wing = |wing_handle: Handle<Texture>, translation: Vec3| {
-                c.spawn_bundle(SpriteBundle {
-                    material: materials.add(wing_handle.into()),
-                    transform: from_translation(translation),
-                    ..Default::default()
-                })
-                .insert(Wing);
-            };
-
-            let left_wing = asset_server.load("shootingcraft/left_wing.png");
-            let right_wing = asset_server.load("shootingcraft/right_wing.png");
-            let offset = Vec3::X * 100.0;
-            spawn_wing(left_wing, -offset);
-            spawn_wing(right_wing, offset);
+            let mut offset = Vec3::X * 100.0;
+            textures.by_ref().take(2).for_each(move |ih| {
+                spawn_wing(ih, -offset);
+                offset = -offset;
+            });
             c.spawn_bundle(SpriteBundle {
-                material: materials
-                    .add(asset_server.load("shootingcraft/missilemodule.png").into()),
-                transform: from_translation(Vec3::Y * 45.0),
+                texture: textures.next().unwrap(),
+                transform: Transform::from_translation(Vec3::Y * 45.0),
                 ..Default::default()
             })
             .insert_bundle((MissileModule, Timer::from_seconds(0.2, false)));
             c.spawn_bundle(SpriteBundle {
-                material: materials.add(asset_server.load("shootingcraft/halothingy.png").into()),
+                texture: textures.next().unwrap(),
                 transform: Transform::from_translation(Vec3::ZERO),
                 ..Default::default()
             });
         });
+}
+
+fn spawn_child(
+    c: &mut ChildBuilder,
+    texture: Handle<Image>,
+    translation: Vec3,
+    bundle: impl Bundle,
+) {
+    c.spawn_bundle(SpriteBundle {
+        texture,
+        transform: Transform::from_translation(translation),
+        ..Default::default()
+    })
+    .insert_bundle(bundle);
 }

@@ -1,0 +1,1742 @@
+[
+  (
+    entity: 3,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (-20.0, 42.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (26.41885, 38.288956, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.5005175, 0.8657264),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((8432845199018906269), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 1,
+                  nanos: 0,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": true,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::parent::Parent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+      {
+        "type": "bevy_transform::components::parent::PreviousParent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+    ],
+  ),
+  (
+    entity: 4,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (-10.0, 42.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (31.408495, 29.62273, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.5005175, 0.8657264),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((8432845199018906269), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 1,
+                  nanos: 0,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": true,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::parent::Parent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+      {
+        "type": "bevy_transform::components::parent::PreviousParent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+    ],
+  ),
+  (
+    entity: 5,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (0.0, 42.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (36.39814, 20.956507, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.5005175, 0.8657264),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((8432845199018906269), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 1,
+                  nanos: 0,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": true,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::parent::Parent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+      {
+        "type": "bevy_transform::components::parent::PreviousParent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+    ],
+  ),
+  (
+    entity: 6,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (10.0, 42.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (41.387783, 12.290283, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.5005175, 0.8657264),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((8432845199018906269), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 1,
+                  nanos: 0,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": true,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::parent::Parent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+      {
+        "type": "bevy_transform::components::parent::PreviousParent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+    ],
+  ),
+  (
+    entity: 7,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (20.0, 42.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (46.37743, 3.6240597, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.5005175, 0.8657264),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((8432845199018906269), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 1,
+                  nanos: 0,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": true,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::parent::Parent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+      {
+        "type": "bevy_transform::components::parent::PreviousParent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+    ],
+  ),
+  (
+    entity: 8,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (-100.0, -0.0, -0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (-49.896446, 86.66225, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.5005175, 0.8657264),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((14753481958297406938), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::parent::Parent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+      {
+        "type": "bevy_transform::components::parent::PreviousParent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+    ],
+  ),
+  (
+    entity: 9,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (100.0, 0.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (49.896446, -86.66225, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.5005175, 0.8657264),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((16694292594405039816), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::parent::Parent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+      {
+        "type": "bevy_transform::components::parent::PreviousParent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+    ],
+  ),
+  (
+    entity: 10,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (0.0, 45.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (38.99801, 22.453402, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.5005175, 0.8657264),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((4270192528278884389), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 0,
+                  nanos: 200000000,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": true,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::parent::Parent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+      {
+        "type": "bevy_transform::components::parent::PreviousParent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+    ],
+  ),
+  (
+    entity: 11,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (0.0, 0.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (0.0, 0.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.5005175, 0.8657264),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((1981689954799811417), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::parent::Parent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+      {
+        "type": "bevy_transform::components::parent::PreviousParent",
+        "tuple_struct": [
+          {
+            "type": "bevy_ecs::entity::Entity",
+            "value": 2,
+          },
+        ],
+      },
+    ],
+  ),
+  (
+    entity: 2,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (0.0, 0.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.5005175, 0.8657264),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (0.0, 0.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, -0.5005175, 0.8657264),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((3096805413214856604), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::children::Children",
+        "tuple_struct": [
+          {
+            "type": "smallvec::SmallVec<[bevy_ecs::entity::Entity; 8]>",
+            "list": [
+              {
+                "type": "bevy_ecs::entity::Entity",
+                "value": 3,
+              },
+              {
+                "type": "bevy_ecs::entity::Entity",
+                "value": 4,
+              },
+              {
+                "type": "bevy_ecs::entity::Entity",
+                "value": 5,
+              },
+              {
+                "type": "bevy_ecs::entity::Entity",
+                "value": 6,
+              },
+              {
+                "type": "bevy_ecs::entity::Entity",
+                "value": 7,
+              },
+              {
+                "type": "bevy_ecs::entity::Entity",
+                "value": 8,
+              },
+              {
+                "type": "bevy_ecs::entity::Entity",
+                "value": 9,
+              },
+              {
+                "type": "bevy_ecs::entity::Entity",
+                "value": 10,
+              },
+              {
+                "type": "bevy_ecs::entity::Entity",
+                "value": 11,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  ),
+  (
+    entity: 0,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (10.0, 10.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (10.0, 10.0, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((8056407266822924466), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+    ],
+  ),
+  (
+    entity: 1,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (0.0, 0.0, 999.9),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (0.0, 0.0, 999.9),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.0, 1.0),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::camera::camera::Camera",
+        "struct": {
+          "projection_matrix": {
+            "type": "glam::mat4::Mat4",
+            "value": (0.0015625, 0.0, 0.0, 0.0, 0.0, 0.0027777778, 0.0, 0.0, 0.0, 0.0, 0.001, 0.0, -0.0, -0.0, 1.0, 1.0),
+          },
+          "name": {
+            "type": "core::option::Option<alloc::string::String>",
+            "value": Some("camera_2d"),
+          },
+          "near": {
+            "type": "f32",
+            "value": 0.0,
+          },
+          "far": {
+            "type": "f32",
+            "value": 1000.0,
+          },
+        },
+      },
+      {
+        "type": "bevy_render::camera::projection::OrthographicProjection",
+        "struct": {
+          "left": {
+            "type": "f32",
+            "value": -640.0,
+          },
+          "right": {
+            "type": "f32",
+            "value": 640.0,
+          },
+          "bottom": {
+            "type": "f32",
+            "value": -360.0,
+          },
+          "top": {
+            "type": "f32",
+            "value": 360.0,
+          },
+          "near": {
+            "type": "f32",
+            "value": 0.0,
+          },
+          "far": {
+            "type": "f32",
+            "value": 1000.0,
+          },
+          "window_origin": {
+            "type": "bevy_render::camera::projection::WindowOrigin",
+            "value": Center,
+          },
+          "scaling_mode": {
+            "type": "bevy_render::camera::projection::ScalingMode",
+            "value": WindowSize,
+          },
+          "scale": {
+            "type": "f32",
+            "value": 1.0,
+          },
+          "depth_calculation": {
+            "type": "bevy_render::camera::camera::DepthCalculation",
+            "value": ZDifference,
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::VisibleEntities",
+        "struct": {},
+      },
+      {
+        "type": "bevy_render::primitives::Frustum",
+        "struct": {},
+      },
+    ],
+  ),
+  (
+    entity: 12,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (628.94617, -318.51514, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8519961, -0.5235482),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (628.94617, -318.51514, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8519961, -0.5235482),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((18429242226665003852), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 1,
+                  nanos: 119039400,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": false,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<simply_shooter::projectile::Projectile>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((1114375319248906193), (6298619649789039366))),
+          },
+        },
+      },
+    ],
+  ),
+  (
+    entity: 13,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (568.9949, -318.98166, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8704942, -0.4921788),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (568.9949, -318.98166, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8704942, -0.4921788),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((18429242226665003852), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 1,
+                  nanos: 36461700,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": false,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<simply_shooter::projectile::Projectile>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((1114375319248906193), (6298619649789039366))),
+          },
+        },
+      },
+    ],
+  ),
+  (
+    entity: 14,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (563.83966, -327.55045, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8704942, -0.4921788),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (563.83966, -327.55045, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8704942, -0.4921788),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((18429242226665003852), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 1,
+                  nanos: 36461700,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": false,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<simply_shooter::projectile::Projectile>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((1114375319248906193), (6298619649789039366))),
+          },
+        },
+      },
+    ],
+  ),
+  (
+    entity: 15,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (558.68445, -336.11923, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8704942, -0.4921788),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (558.68445, -336.11923, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8704942, -0.4921788),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((18429242226665003852), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 1,
+                  nanos: 36461700,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": false,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<simply_shooter::projectile::Projectile>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((1114375319248906193), (6298619649789039366))),
+          },
+        },
+      },
+    ],
+  ),
+  (
+    entity: 16,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (553.52924, -344.68802, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8704942, -0.4921788),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (553.52924, -344.68802, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8704942, -0.4921788),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((18429242226665003852), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 1,
+                  nanos: 36461700,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": false,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<simply_shooter::projectile::Projectile>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((1114375319248906193), (6298619649789039366))),
+          },
+        },
+      },
+    ],
+  ),
+  (
+    entity: 17,
+    components: [
+      {
+        "type": "bevy_transform::components::transform::Transform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (548.374, -353.2568, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8704942, -0.4921788),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_transform::components::global_transform::GlobalTransform",
+        "struct": {
+          "translation": {
+            "type": "glam::vec3::Vec3",
+            "value": (548.374, -353.2568, 0.0),
+          },
+          "rotation": {
+            "type": "glam::quat::Quat",
+            "value": (0.0, 0.0, 0.8704942, -0.4921788),
+          },
+          "scale": {
+            "type": "glam::vec3::Vec3",
+            "value": (1.0, 1.0, 1.0),
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<bevy_render::texture::image::Image>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((18429242226665003852), (6298619649789039366))),
+          },
+        },
+      },
+      {
+        "type": "bevy_render::view::visibility::Visibility",
+        "struct": {
+          "is_visible": {
+            "type": "bool",
+            "value": true,
+          },
+        },
+      },
+      {
+        "type": "bevy_core::time::timer::Timer",
+        "struct": {
+          "stopwatch": {
+            "type": "bevy_core::time::stopwatch::Stopwatch",
+            "struct": {
+              "elapsed": {
+                "type": "core::time::Duration",
+                "value": (
+                  secs: 1,
+                  nanos: 36461700,
+                ),
+              },
+              "paused": {
+                "type": "bool",
+                "value": false,
+              },
+            },
+          },
+          "repeating": {
+            "type": "bool",
+            "value": false,
+          },
+          "finished": {
+            "type": "bool",
+            "value": false,
+          },
+          "times_finished": {
+            "type": "u32",
+            "value": 0,
+          },
+        },
+      },
+      {
+        "type": "bevy_asset::handle::Handle<simply_shooter::projectile::Projectile>",
+        "struct": {
+          "id": {
+            "type": "bevy_asset::handle::HandleId",
+            "value": AssetPathId(((1114375319248906193), (6298619649789039366))),
+          },
+        },
+      },
+    ],
+  ),
+]
