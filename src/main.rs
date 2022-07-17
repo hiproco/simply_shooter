@@ -1,4 +1,4 @@
-use std::io::Write;
+use std::{io::Write, iter};
 
 use bevy::{
     ecs::system::EntityCommands,
@@ -110,13 +110,6 @@ fn startup(
         .insert(Velocity(Vec3::ZERO))
         .with_children(|c| {
             // let shooting_craft = asset_server.load_folder("shootingcraft").unwrap();
-            #[derive(Bundle)]
-            struct BundleBundle<B1: Bundle, B2: Bundle> {
-                #[bundle]
-                b0: B1,
-                #[bundle]
-                b1: B2,
-            }
             let mut textures = [
                 "shootingcraft/gunmodule.png",
                 "shootingcraft/left_wing.png",
@@ -126,45 +119,38 @@ fn startup(
             ]
             .iter()
             .map(|&path| asset_server.load(path));
-            // let side_handle = asset_server.load();
             let translation = Vec3::new(0.0, 42.0, 0.0);
-            let side_handle = textures.next().unwrap();
+            let mut side_handle = textures.by_ref().take(1).flat_map(iter::repeat);
             (-2..3)
-                .map(|m| BundleBundle {
-                    b0: SpriteBundle {
-                        texture: side_handle.clone(),
-                        transform: Transform::from_translation(
-                            translation + Vec3::X * 10.0 * m as f32,
-                        ),
-                        sprite: Sprite {
-                            custom_size: Some(vec2(1f32, 4f32)),
-                            ..Default::default()
-                        },
+                .map(|m| SpriteBundle {
+                    texture: side_handle.next().unwrap(),
+                    transform: Transform::from_translation(translation + Vec3::X * 10.0 * m as f32),
+                    sprite: Sprite {
+                        custom_size: Some(vec2(1f32, 4f32)),
                         ..Default::default()
                     },
-                    b1: (SideArm, Timer::from_seconds(1.0, false)),
+                    ..Default::default()
                 })
                 .for_each(|b| {
-                    c.spawn_bundle(b);
+                    c.spawn_bundle(b)
+                        .insert_bundle((SideArm, Timer::from_seconds(1.0, false)));
                 });
-            let mut spawn_wing = |texture: Handle<Image>, translation: Vec3| {
-                spawn_child(c, texture, translation, (Wing,));
-            };
             let mut offset = Vec3::X * 100.0;
-            textures.by_ref().take(2).for_each(move |ih| {
-                spawn_wing(ih, -offset);
+            textures.by_ref().take(2).for_each(|ih| {
+                spawn_child(c, ih, -offset, (Wing,));
                 offset = -offset;
             });
-            c.spawn_bundle(SpriteBundle {
-                texture: textures.next().unwrap(),
-                transform: Transform::from_translation(Vec3::Y * 45.0),
-                ..Default::default()
-            })
-            .insert_bundle((MissileModule, Timer::from_seconds(0.2, false)));
-            c.spawn_bundle(SpriteBundle {
-                texture: textures.next().unwrap(),
-                transform: Transform::from_translation(Vec3::ZERO),
-                ..Default::default()
+            let mut module = true;
+            textures.zip([Vec3::Y * 45.0,Vec3::ZERO]).for_each(|(texture, translation)| {
+                let mut e = c.spawn_bundle(SpriteBundle {
+                    texture,
+                    transform: Transform::from_translation(translation),
+                    ..Default::default()
+                });
+                if module {
+                    e.insert_bundle((MissileModule, Timer::from_seconds(0.2, false)));
+                    module = false;
+                }
             });
         });
 }
