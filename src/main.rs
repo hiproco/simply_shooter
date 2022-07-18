@@ -94,77 +94,53 @@ fn startup(
     asset_server: Res<AssetServer>,
     _scence_spawner: Res<SceneSpawner>,
 ) {
-    let texture_handle = asset_server.load("shootingcraft/cockpit.png");
     asset_server.watch_for_changes().unwrap();
     // let children = command.spawn_batch(vec![
     //     ()
     // ]);
     // command.spawn_scene(asset_server.load("scene/test.scn.ron"));
-    command
-        .spawn_bundle(SpriteBundle {
-            texture: texture_handle,
-            transform: Transform::from_rotation(Quat::from_rotation_z(-1.57)),
+    let mut textures = [
+        "shootingcraft/gunmodule.png",
+        "shootingcraft/left_wing.png",
+        "shootingcraft/right_wing.png",
+        "shootingcraft/missilemodule.png",
+        "shootingcraft/halothingy.png",
+        "shootingcraft/cockpit.png",
+    ]
+    .iter()
+    .zip([5,1,1,1,1,1])
+    .flat_map(|(&path,n)| iter::repeat(asset_server.load(path)).take(n));
+
+    let offset = Vec3::X * 100.0;
+    let mut e = textures
+        .zip(
+            (-2..3)
+                .map(|m| Vec3::new(10.0 * m as f32, 42.0, 0.0))
+                .chain([-offset, offset, Vec3::Y * 45.0, Vec3::ZERO, Vec3::ZERO]),
+        )
+        .map(|(texture, translation)| SpriteBundle {
+            texture,
+            transform: Transform::from_translation(translation),
             ..Default::default()
         })
+        .map(|s| command.spawn_bundle(s).id())
+        .collect::<Vec<_>>();
+    for id in 0..5 {
+        command.entity(e[id]).insert_bundle((SideArm, Timer::from_seconds(1.0, false)));
+    }
+    for id in 5..7 {
+        command.entity(e[id]).insert(Wing);
+    }
+    for id in 7..8 {
+        command
+            .entity(e[id])
+            .insert_bundle((MissileModule, Timer::from_seconds(0.2, false)));
+    }
+    let main = e.pop().unwrap();
+    // side_arms.extend(e);
+    command
+        .entity(main)
         .insert(PlayerShip)
         .insert(Velocity(Vec3::ZERO))
-        .with_children(|c| {
-            // let shooting_craft = asset_server.load_folder("shootingcraft").unwrap();
-            let mut textures = [
-                "shootingcraft/gunmodule.png",
-                "shootingcraft/left_wing.png",
-                "shootingcraft/right_wing.png",
-                "shootingcraft/missilemodule.png",
-                "shootingcraft/halothingy.png",
-            ]
-            .iter()
-            .map(|&path| asset_server.load(path));
-            let translation = Vec3::new(0.0, 42.0, 0.0);
-            let mut side_handle = textures.by_ref().take(1).flat_map(iter::repeat);
-            (-2..3)
-                .map(|m| SpriteBundle {
-                    texture: side_handle.next().unwrap(),
-                    transform: Transform::from_translation(translation + Vec3::X * 10.0 * m as f32),
-                    sprite: Sprite {
-                        custom_size: Some(vec2(1f32, 4f32)),
-                        ..Default::default()
-                    },
-                    ..Default::default()
-                })
-                .for_each(|b| {
-                    c.spawn_bundle(b)
-                        .insert_bundle((SideArm, Timer::from_seconds(1.0, false)));
-                });
-            let mut offset = Vec3::X * 100.0;
-            textures.by_ref().take(2).for_each(|ih| {
-                spawn_child(c, ih, -offset, (Wing,));
-                offset = -offset;
-            });
-            let mut module = true;
-            textures.zip([Vec3::Y * 45.0,Vec3::ZERO]).for_each(|(texture, translation)| {
-                let mut e = c.spawn_bundle(SpriteBundle {
-                    texture,
-                    transform: Transform::from_translation(translation),
-                    ..Default::default()
-                });
-                if module {
-                    e.insert_bundle((MissileModule, Timer::from_seconds(0.2, false)));
-                    module = false;
-                }
-            });
-        });
-}
-
-fn spawn_child(
-    c: &mut ChildBuilder,
-    texture: Handle<Image>,
-    translation: Vec3,
-    bundle: impl Bundle,
-) {
-    c.spawn_bundle(SpriteBundle {
-        texture,
-        transform: Transform::from_translation(translation),
-        ..Default::default()
-    })
-    .insert_bundle(bundle);
+        .push_children(&e);
 }
